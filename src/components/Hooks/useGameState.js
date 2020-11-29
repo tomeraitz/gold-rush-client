@@ -40,6 +40,7 @@ const useGameState = () => {
       onSwipedRight: () => handleUserKeyPress({keyCode : 39}),
       onSwipedUp: () => handleUserKeyPress({keyCode : 38}),
       onSwipedDown: () => handleUserKeyPress({keyCode : 40}),
+      preventDefaultTouchmoveEvent: true
    })
 
    useEffect(() => {
