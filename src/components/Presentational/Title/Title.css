@@ -1,0 +1,19 @@
+.title{
+    display: flex;
+    font-size: calc(1vh + 2vw);
+    justify-content: center;
+}
+
+.white{
+    color: white;
+}
+
+.medium{
+    font-size: calc(2vh + 2vw);
+    font-weight: bold;
+}
+
+.big{
+    font-size: calc(4vh + 3vw);
+    font-weight: bold;
+}

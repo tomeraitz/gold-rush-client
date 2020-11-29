@@ -1,0 +1,50 @@
+.game{
+    display: flex;
+    flex-direction: row;
+    width: 100vw;
+    height: 100vh;
+    flex-flow: column wrap;
+}
+
+.grid{
+    display: grid;
+    flex: 1;
+    grid-template-columns: repeat(8, 1fr);
+    grid-template-rows: repeat(8, 1fr);
+}
+
+.coin{
+    background-image: url("../../../assets/images/coin.png");
+    background-size: contain;
+    width: 100%;
+    background-repeat: no-repeat;
+    background-position: center;
+    height: 100%;
+}
+
+.block{
+    background-image: url("../../../assets/images/block.png");
+    background-size: cover;
+    width: 100%;
+    background-repeat: no-repeat;
+    background-position: center;
+    height: 100%;
+}
+
+.player1{
+    background-image: url("../../../assets/images/player1.png");
+    background-size: contain;
+    width: 100%;
+    background-repeat: no-repeat;
+    background-position: center;
+    height: 100%;
+}
+
+.player2{
+    background-image: url("../../../assets/images/player2.png");
+    background-size: contain;
+    width: 100%;
+    background-repeat: no-repeat;
+    background-position: center;
+    height: 100%;
+}
