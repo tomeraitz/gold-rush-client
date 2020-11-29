@@ -19,11 +19,11 @@ const Game = (props)=>{
    return  (
       <>
          {!gameState.endGameStatus ?
-         <div className="game">
+         <div {...handleSwipe} className="game">
             <Header className="primary-bg">
                <Title className="title white">Level {gameState.level}</Title>
             </Header>
-            <div {...handleSwipe} className="grid">
+            <div className="grid">
                {gameState.gridArray && gameState.gridArray.map((item,index)=>{
                   return <div className={item.value} key={index}></div>
                })}
