@@ -36,10 +36,11 @@ const useGameState = () => {
    const isDesktop = useCallback(()=>device.device.type === 'desktop',[]);
 
    const handleSwipe = useSwipeable({
-      onSwipedLeft: () => handleUserKeyPress({keyCode : 37}),
-      onSwipedRight: () => handleUserKeyPress({keyCode : 39}),
-      onSwipedUp: () => handleUserKeyPress({keyCode : 38}),
-      onSwipedDown: () => handleUserKeyPress({keyCode : 40}),
+      // onSwipedLeft: () => handleUserKeyPress({keyCode : 37}),
+      // onSwipedRight: () => handleUserKeyPress({keyCode : 39}),
+      // onSwipedUp: () => handleUserKeyPress({keyCode : 38}),
+      // onSwipedDown: () => handleUserKeyPress({keyCode : 40}),
+      onSwiping : SwipeEventDat =>console.log(SwipeEventDat.dir),
       preventDefaultTouchmoveEvent: true
    })
 
