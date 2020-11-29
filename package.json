@@ -16,9 +16,9 @@
     "web-vitals": "^0.2.4"
   },
   "scripts": {
-    "start": "set REACT_APP_SERVER_API=https://gold-rush-server.herokuapp.com && react-scripts start",
+    "start": " react-scripts start",
     "start:dev": "set REACT_APP_SERVER_API=http://localhost:8000 && react-scripts start",
-    "build": "react-scripts build",
+    "build": "set REACT_APP_SERVER_API=https://gold-rush-server.herokuapp.com && react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject"
   },
