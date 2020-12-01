@@ -14,7 +14,7 @@
 }
 
 .grid-phone{
-    height: 70vh;
+    height: 65vh;
 }
 
 .coin{
@@ -55,6 +55,6 @@
 
 @media (orientation: landscape) {
     .grid-phone{
-        height: 65vh;
+        height: 60vh;
     }
 }

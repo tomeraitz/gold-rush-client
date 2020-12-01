@@ -2,11 +2,13 @@ import './App.css';
 import {
    useState,
    useEffect,
+   Suspense,
+   lazy
 } from 'react'
-import PopupContainer from '../PopupContainer';
 import Loading from '../Loading';
-import Game from '../Game';
 import useHttpsRequests from '../../Hooks/useHttpsRequests'
+const PopupContainer = lazy(() => import('../PopupContainer'));
+const Game = lazy(() => import('../Game'));
 
 const App = ()=>{
    const [isLoaded , setLoad] = useState(false);
@@ -22,9 +24,11 @@ const App = ()=>{
    },[checkIfServerAlive])
    return (
       <div id="app">
-         {(!isInGame && isLoaded)  && <PopupContainer onClick={()=>setGameStatus(true)} stage={'welcome'}></PopupContainer> } 
-         {!isLoaded && <Loading>Loading ...</Loading> }
-         { isInGame && <Game goBack={()=>setGameStatus(false)}></Game>}
+         <Suspense fallback={<Loading>Loading ...</Loading>}>
+            {(!isInGame && isLoaded)  && <PopupContainer onClick={()=>setGameStatus(true)} stage={'welcome'}></PopupContainer> } 
+            {!isLoaded && <Loading>Loading ...</Loading> }
+            { isInGame && <Game goBack={()=>setGameStatus(false)}></Game>}
+         </Suspense>
       </div>
    )
 }

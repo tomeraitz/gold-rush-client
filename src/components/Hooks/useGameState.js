@@ -46,7 +46,7 @@ const useGameState = () => {
 
    const startPress = (e) =>{
       if (e.changedTouches.length > 1) e.preventDefault();
-      if(!e.keyCode) e.keyCode = e.target.id*1;
+      e.keyCode = e.target.id*1 || e.target.parentElement.id*1;
       if(!timeoutInterval){
          setTimeoutInterval(
             setTimeout(() => {
