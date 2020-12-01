@@ -6,8 +6,14 @@
     flex: inherit;
 }
 
+.footer-phone{
+    flex: 1;
+    height: 5vh;
+}
+
 .footer-item{
     display: flex;
     flex : 1;
     margin: 0;
 }
+

@@ -4,3 +4,9 @@
     justify-content: center;
     flex: inherit;
 }
+
+.header-phone{
+    flex: 1;
+    height: 5vh;
+}
+

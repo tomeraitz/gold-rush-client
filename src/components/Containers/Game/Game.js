@@ -4,7 +4,8 @@ import Footer from '../../Presentational/Footer';
 import Title from '../../Presentational/Title';
 import useGameState from '../../Hooks/useGameState';
 import PopupContainer from '../PopupContainer';
-import ButtonPhoneController from '../ButtonPhoneController'
+import ButtonPhoneController from '../ButtonPhoneController';
+import Loading from '../Loading';
 
 const Game = (props)=>{
    const gameStateObj = useGameState();
@@ -17,41 +18,38 @@ const Game = (props)=>{
    }
    
    const nextLevel = () => socket.emit('messageToServer', {funcName : 'nextLevel', endGameStatus : gameState.endGameStatus});
-
-   return  (
-      <>
-         {!gameState.endGameStatus ?
-         <div  className="game">
-            {gameState.gridArray &&
-               <Header className="primary-bg">
-                  <Title className="title white">Level {gameState.level}</Title>
-               </Header>
-            }
-            <div className={startPress ? 'grid grid-phone' : 'grid'}>
-               {gameState.gridArray && gameState.gridArray.map((item,index)=>{
-                  return <div className={item.value} key={index}></div>
-               })}
-            </div>
-            {gameState.gridArray &&
+   if(gameState.gridArray || gameState.endGameStatus){
+      return  (
+         <>
+            {!gameState.endGameStatus ?
+            <div  className="game">
+                  <Header className={startPress ? 'primary-bg header-phone' : 'primary-bg'}>
+                     <Title className="title white">Level {gameState.level}</Title>
+                  </Header>
+               <div className={startPress ? 'grid grid-phone' : 'grid'}>
+                  { gameState.gridArray.map((item,index)=>{
+                     return <div className={item.value} key={index}></div>
+                  })}
+               </div>
                <ButtonPhoneController startPress={startPress} endPress={endPress} />
+                  <Footer className={startPress && 'footer-phone'}>
+                     <Title className="title primary-bg footer-item white medium">Payer 1 score: {gameState.player1  && gameState.player1.score}</Title>
+                     <Title className="title second-bg footer-item white medium">Payer 2 score: {gameState.player2  && gameState.player2.score}</Title>
+                  </Footer>
+            </div>
+            : <PopupContainer 
+                     title={gameState.endGameStatus} 
+                     titleButton={gameState.endGameStatus.includes('won') ? 'Next Level' : 'Try Again'}
+                     goBack={goBackFunc}
+                     nextLevel={nextLevel}
+                     stage={'endGame'}>
+               </PopupContainer>
             }
-            {gameState.gridArray &&
-               <Footer>
-                  <Title className="title primary-bg footer-item white medium">Payer 1 score: {gameState.player1  && gameState.player1.score}</Title>
-                  <Title className="title second-bg footer-item white medium">Payer 2 score: {gameState.player2  && gameState.player2.score}</Title>
-               </Footer>
-            }
-         </div>
-         : <PopupContainer 
-                  title={gameState.endGameStatus} 
-                  titleButton={gameState.endGameStatus.includes('won') ? 'Next Level' : 'Try Again'}
-                  goBack={goBackFunc}
-                  nextLevel={nextLevel}
-                  stage={'endGame'}>
-            </PopupContainer>
-         }
-      </>
-   )
+         </>
+      )
+   }
+   else return <Loading>Loading ...</Loading>
+
 }
 
 export default Game;

@@ -1,10 +1,11 @@
-.controller-continuer{
+.controller-container{
     display: flex;
     flex: 1;
     flex-direction: column;
     width: 100%;
     justify-self: center;
     align-self: center;
+    height: 20vh;
 }
 
 .flex-controller{
@@ -18,8 +19,7 @@
 }
 
 @media (orientation: landscape) {
-    .controller-continuer{
-      height: 10vh;
+    .controller-container{
       width: 50%;
     }
 }
