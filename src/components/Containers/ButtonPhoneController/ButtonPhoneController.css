@@ -1,0 +1,25 @@
+.controller-continuer{
+    display: flex;
+    flex: 1;
+    flex-direction: column;
+    width: 100%;
+    justify-self: center;
+    align-self: center;
+}
+
+.flex-controller{
+    display: flex;
+    flex-direction: row;
+    flex: 1;
+}
+
+.controller-center{
+    margin: 0 auto;
+}
+
+@media (orientation: landscape) {
+    .controller-continuer{
+      height: 10vh;
+      width: 50%;
+    }
+}

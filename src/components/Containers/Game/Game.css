@@ -13,6 +13,10 @@
     grid-template-rows: repeat(8, 1fr);
 }
 
+.grid-phone{
+    height: 70vh;
+}
+
 .coin{
     background-image: url("../../../assets/images/coin.png");
     background-size: contain;
@@ -47,4 +51,10 @@
     background-repeat: no-repeat;
     background-position: center;
     height: 100%;
+}
+
+@media (orientation: landscape) {
+    .grid-phone{
+        height: 65vh;
+    }
 }
