@@ -8,6 +8,7 @@
     "@testing-library/user-event": "^12.1.10",
     "axios": "^0.21.0",
     "device-detector-js": "^2.2.5",
+    "gzipper": "^4.3.0",
     "react": "^17.0.1",
     "react-dom": "^17.0.1",
     "react-icons": "^4.1.0",
@@ -18,7 +19,7 @@
   "scripts": {
     "start": "set REACT_APP_SERVER_API=https://gold-rush-server.herokuapp.com && react-scripts start",
     "start:dev": "set REACT_APP_SERVER_API=http://localhost:8000 && react-scripts start",
-    "build": "react-scripts build",
+    "build": "react-scripts build && gzipper compress ./build",
     "test": "react-scripts test",
     "eject": "react-scripts eject"
   },

@@ -22,19 +22,25 @@ const Game = (props)=>{
       <>
          {!gameState.endGameStatus ?
          <div  className="game">
-            <Header className="primary-bg">
-               <Title className="title white">Level {gameState.level}</Title>
-            </Header>
+            {gameState.gridArray &&
+               <Header className="primary-bg">
+                  <Title className="title white">Level {gameState.level}</Title>
+               </Header>
+            }
             <div className={startPress ? 'grid grid-phone' : 'grid'}>
                {gameState.gridArray && gameState.gridArray.map((item,index)=>{
                   return <div className={item.value} key={index}></div>
                })}
             </div>
-            <ButtonPhoneController startPress={startPress} endPress={endPress} />
-            <Footer>
-               <Title className="title primary-bg footer-item white medium">Payer 1 score: {gameState.player1  && gameState.player1.score}</Title>
-               <Title className="title second-bg footer-item white medium">Payer 2 score: {gameState.player2  && gameState.player2.score}</Title>
-            </Footer>
+            {gameState.gridArray &&
+               <ButtonPhoneController startPress={startPress} endPress={endPress} />
+            }
+            {gameState.gridArray &&
+               <Footer>
+                  <Title className="title primary-bg footer-item white medium">Payer 1 score: {gameState.player1  && gameState.player1.score}</Title>
+                  <Title className="title second-bg footer-item white medium">Payer 2 score: {gameState.player2  && gameState.player2.score}</Title>
+               </Footer>
+            }
          </div>
          : <PopupContainer 
                   title={gameState.endGameStatus} 
