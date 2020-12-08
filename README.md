@@ -1,70 +1,111 @@
-# Getting Started with Create React App
+[![Contributors][contributors-shield]][contributors-url]
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
-## Available Scripts
 
-In the project directory, you can run:
+<!-- PROJECT LOGO -->
+<br />
+<p align="center">
+  <a href="https://github.com/tomeraitz/gold-rush-client">
+    <img src="./public/gold-rush.ico" alt="Logo" width="80" height="80">
+  </a>
 
-### `yarn start`
+  <h3 align="center">Gold Rush Client</h3>
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+  <p align="center">
+  A Game Gold Rush - this repo is the client-side with react.
+    <br />
+    <br />
+    <br />
+    <a href="https://gold-rush.netlify.app/">View Demo</a>
+    ·
+    <a href="https://github.com/tomeraitz/gold-rush-client/issues">Report Bug</a>
+  </p>
+</p>
 
-The page will reload if you make edits.\
-You will also see any lint errors in the console.
 
-### `yarn test`
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+<!-- TABLE OF CONTENTS -->
+<details open="open">
+  <summary><h2 style="display: inline-block">Content</h2></summary>
+  <ol>
+    <li>
+      <a href="#about-the-project">About The Project</a>
+      <ul>
+        <li><a href="#built-with">Built With</a></li>
+      </ul>
+    </li>
+    <li>
+      <a href="#getting-started">Getting Started</a>
+      <ul>
+        <li><a href="#installation">Installation</a></li>
+      </ul>
+    </li>
+    <li><a href="#File">File Hierarchy</a></li>
+    <li><a href="#acknowledgements">Acknowledgements</a></li>
+  </ol>
+</details>
 
-### `yarn build`
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+<!-- ABOUT THE PROJECT -->
+## About The Project
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+<img src="./src/assets/images/gold-rush.gif" />
+This Repository is client-side, here we can find the UI behavior.
 
-### `yarn eject`
+### Built With
 
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
+* [React](https://reactjs.org/)
+* [socket.io-client](https://www.npmjs.com/package/socket.io-client)
+* [axios](https://www.npmjs.com/package/axios)
+* [eslint](https://eslint.org/)
 
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+## Getting Started
+To get a local copy up and running follow these simple steps.
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
 
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
+### Installation
 
-## Learn More
+1. Clone the repo
+   ```sh
+   git clone https://github.com/tomeraitz/gold-rush-client.git
+   ```
+2. Install NPM packages
+   ```sh
+   npm install
+   ```
+3. Run It on localhost with client repository(3000) with server localhost(8000)
+    ```sh
+   npm run start:dev 
+   ```
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+4. Run It on localhost with client repository(3000) with production server
+    ```sh
+   npm start 
+   ```
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+<!-- USAGE EXAMPLES -->
+<h3 id="File">File Hierarchy</h3>
 
-### Code Splitting
+**src**
+-  **assets**
+    - **images**  - all the client images.
+-  **components**
+    - **Containers** - I used the Presentational and Container pattern for this project.
+        - App - The main component that rendered in the beginning.
+        - ButtonPhoneController - PC and mobile are different, in pc you move with the keyboard, in mobile you move with buttons, this component control those buttons.
+        - Game - Control the game UI
+        - Loading - The loading page.
+        - PopupContainer - control on all the game popups.
+    - **Hooks** - custom hooks.
+        - useGameState - Control on the data of the game.
+        - useHttpsRequests - Control all the client requests for a website (not websocket).
+    - **Presentational** - All the simple components.
+    - **helpers** - React embed scripts (reportWebVitals.js and setupTests.js).
+## Acknowledgements
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
+* The project live at [Netlify](https://www.netlify.com/)
+* The Read me file was created with the template [Best-README-Template](https://github.com/othneildrew/Best-README-Template)
 
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `yarn build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+[contributors-shield]: https://img.shields.io/github/contributors/tomeraitz/gold-rush-client?color=green&style=for-the-badge
+[contributors-url]: https://github.com/tomeraitz/gold-rush-client/graphs/contributors
