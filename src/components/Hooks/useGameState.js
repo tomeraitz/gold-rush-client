@@ -46,7 +46,6 @@ const useGameState = () => {
          endPress();
          return;
       }
-      window.getSelection().removeAllRanges();
       e.keyCode = e.target ? (e.target.id*1 || e.target.parentElement.id*1) : 0;
       if(!timeoutInterval){
          handleUserKeyPress(e);

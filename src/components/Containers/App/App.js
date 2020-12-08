@@ -15,15 +15,22 @@ const App = ()=>{
    const [isInGame , setGameStatus] = useState(false);
    const { checkIfServerAlive } = useHttpsRequests()
    useEffect(()=>{
-      checkIfServerAlive().then((res)=>{
-         console.log(res.data)
-         setLoad(true)
-      }).catch((err)=>{
-         console.error(err)
-      })
-   },[checkIfServerAlive])
+      console.log("In useEffect" , document.onselectstart)
+      document.onselectstart = function()
+      {
+         if(isInGame) return false;
+      };
+      if(!isLoaded){
+         checkIfServerAlive().then((res)=>{
+            console.log(res.data)
+            setLoad(true)
+         }).catch((err)=>{
+            console.error(err)
+         })
+      }
+   },[checkIfServerAlive,isInGame, isLoaded])
    return (
-      <div id="app">
+      <div id="app" >
          <Suspense fallback={<Loading>Loading ...</Loading>}>
             {(!isInGame && isLoaded)  && <PopupContainer onClick={()=>setGameStatus(true)} stage={'welcome'}></PopupContainer> } 
             {!isLoaded && <Loading>Loading ...</Loading> }
