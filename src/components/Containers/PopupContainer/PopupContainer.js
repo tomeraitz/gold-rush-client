@@ -12,7 +12,7 @@ const popUpStages ={
       title : 'Choose Type Game',
       buttonLeft : {
          onClick : null,
-         title : 'Signal player',
+         title : 'Single player',
          disabled : false
       },
       buttonRight : {
