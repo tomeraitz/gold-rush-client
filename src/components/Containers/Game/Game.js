@@ -40,6 +40,7 @@ const Game = (props)=>{
             : <PopupContainer 
                      title={gameState.endGameStatus} 
                      titleButton={gameState.endGameStatus.includes('won') ? 'Next Level' : 'Try Again'}
+                     gifSrc={gameState.endGameStatus.includes('won') ? "https://media.giphy.com/media/lo4Rb0bkHuH1V8dbvY/giphy.gif" : "https://media.giphy.com/media/8byuvxPG1m7dtYHEph/giphy.gif"}
                      goBack={goBackFunc}
                      nextLevel={nextLevel}
                      stage={'endGame'}>

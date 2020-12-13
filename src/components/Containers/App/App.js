@@ -6,16 +6,17 @@ import {
    lazy
 } from 'react'
 import Loading from '../Loading';
-import useHttpsRequests from '../../Hooks/useHttpsRequests'
+import useHttpsRequests from '../../Hooks/useHttpsRequests';
+import useMusic from '../../Hooks/useMusic';
 const PopupContainer = lazy(() => import('../PopupContainer'));
 const Game = lazy(() => import('../Game'));
 
 const App = ()=>{
    const [isLoaded , setLoad] = useState(false);
    const [isInGame , setGameStatus] = useState(false);
-   const { checkIfServerAlive } = useHttpsRequests()
+   const { checkIfServerAlive } = useHttpsRequests();
+   const [backgroundSound]= useMusic();
    useEffect(()=>{
-      console.log("In useEffect" , document.onselectstart)
       document.onselectstart = function()
       {
          if(isInGame) return false;
@@ -32,7 +33,10 @@ const App = ()=>{
    return (
       <div id="app" >
          <Suspense fallback={<Loading>Loading ...</Loading>}>
-            {(!isInGame && isLoaded)  && <PopupContainer onClick={()=>setGameStatus(true)} stage={'welcome'}></PopupContainer> } 
+            {(!isInGame && isLoaded)  && <PopupContainer onClick={()=>{
+               backgroundSound();
+               setGameStatus(true)
+               }} stage={'welcome'}></PopupContainer> } 
             {!isLoaded && <Loading>Loading ...</Loading> }
             { isInGame && <Game goBack={()=>setGameStatus(false)}></Game>}
          </Suspense>

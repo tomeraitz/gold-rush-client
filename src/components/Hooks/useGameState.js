@@ -17,7 +17,7 @@ const keyCodeList = {
 
 
 const useGameState = () => {
-   const [player, setPlayer] = useState('player1');
+   const [player] = useState('player1');
    const [data, setData] = useState({});
    const [socket, setSocket] = useState(null);
    const [timeoutInterval , setTimeoutInterval] = useState(null);
