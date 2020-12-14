@@ -1,21 +1,14 @@
 .menu{
-  border: 2px solid white;
-  width: 7%;
-  height: 90%;
-  align-self: center;
-  color: white;
-}
-
-.menu-bars{
-  position: absolute;
   display: flex;
-  flex-direction: column;
+  height: 3rem;
+  position: fixed;
+  top: 3px;
+  right: 3px;
+  color: white;
   justify-content: space-around;
-  border: none;
+  align-items: center;
+  flex-direction: column;
   cursor: pointer;
-  padding: 0;
-  width: 2rem;
-  height: 2rem;
   z-index: 10;
 }
 
@@ -24,5 +17,39 @@
   transition: all 0.3s linear;
   position: relative;
   transform-origin: 1px;
-  color: white;
+  background-color: white;
+  width: 3rem;
+  height: 0.3rem;
+}
+
+.open-burger:first-child {
+  transform: rotate(45deg);
+}
+.open-burger:nth-child(2) {
+  opacity: 0;
+  transform: translateX(20px);
+}
+.open-burger:nth-child(3) {
+  transform: rotate(-45deg);
+  
+}
+
+.close-burger:first-child {
+  transform: rotate(0);
+}
+.close-burger:nth-child(2) {
+  opacity:1;
+  transform:translateX(0);
+}
+.close-burger:nth-child(3) {
+  transform: rotate(0);
+}
+
+.drop-down{
+  position: fixed;
+  top: 0;
+  right: 0;
+  width: 40%;
+  height: 20rem;
+  z-index: 1;
 }

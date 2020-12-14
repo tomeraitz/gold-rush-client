@@ -24,9 +24,9 @@ const Game = (props)=>{
          <>
             {!gameState.endGameStatus ?
             <div  className="game" >
+                  <Menu />
                   <Header className={startPress ? 'primary-bg header-phone' : 'primary-bg'}>
                      <Title className="title white header-title">Level {gameState.level}</Title>
-                     <Menu />
                   </Header>
                  
                <div className={startPress ? 'grid grid-phone' : 'grid'}>
