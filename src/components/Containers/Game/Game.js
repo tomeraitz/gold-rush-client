@@ -6,6 +6,7 @@ import useGameState from '../../Hooks/useGameState';
 import PopupContainer from '../PopupContainer';
 import ButtonPhoneController from '../ButtonPhoneController';
 import Loading from '../Loading';
+import Menu from '../Menu';
 
 const Game = (props)=>{
    const gameStateObj = useGameState();
@@ -24,8 +25,10 @@ const Game = (props)=>{
             {!gameState.endGameStatus ?
             <div  className="game" >
                   <Header className={startPress ? 'primary-bg header-phone' : 'primary-bg'}>
-                     <Title className="title white">Level {gameState.level}</Title>
+                     <Title className="title white header-title">Level {gameState.level}</Title>
+                     <Menu />
                   </Header>
+                 
                <div className={startPress ? 'grid grid-phone' : 'grid'}>
                   { gameState.gridArray.map((item,index)=>{
                      return <div className={item.value} key={index}></div>

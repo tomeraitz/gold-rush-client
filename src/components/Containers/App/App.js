@@ -33,10 +33,14 @@ const App = ()=>{
    return (
       <div id="app" >
          <Suspense fallback={<Loading>Loading ...</Loading>}>
-            {(!isInGame && isLoaded)  && <PopupContainer onClick={()=>{
+            {(!isInGame && isLoaded)  && 
+            <PopupContainer 
+            onClick={()=>{
                backgroundSound();
                setGameStatus(true)
-               }} stage={'welcome'}></PopupContainer> } 
+               }} 
+               stage={'welcome'}>
+            </PopupContainer> } 
             {!isLoaded && <Loading>Loading ...</Loading> }
             { isInGame && <Game goBack={()=>setGameStatus(false)}></Game>}
          </Suspense>
@@ -45,4 +49,5 @@ const App = ()=>{
 }
 
 export default App;
+
 

@@ -2,6 +2,12 @@
     display: flex;
     font-size: calc(1vh + 2vw);
     justify-content: center;
+    align-self: center;
+}
+
+.header-title{
+    flex-basis: 90%;
+    text-align: center;
 }
 
 .white{

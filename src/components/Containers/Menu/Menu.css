@@ -1,0 +1,28 @@
+.menu{
+  border: 2px solid white;
+  width: 7%;
+  height: 90%;
+  align-self: center;
+  color: white;
+}
+
+.menu-bars{
+  position: absolute;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  border: none;
+  cursor: pointer;
+  padding: 0;
+  width: 2rem;
+  height: 2rem;
+  z-index: 10;
+}
+
+.inner-burger{
+  border-radius: 10px;
+  transition: all 0.3s linear;
+  position: relative;
+  transform-origin: 1px;
+  color: white;
+}
