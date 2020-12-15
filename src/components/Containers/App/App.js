@@ -15,7 +15,7 @@ const App = ()=>{
    const [isLoaded , setLoad] = useState(false);
    const [isInGame , setGameStatus] = useState(false);
    const { checkIfServerAlive } = useHttpsRequests();
-   const [backgroundSound]= useMusic();
+   const [backgroundSound, soundObj]= useMusic();
    useEffect(()=>{
       document.onselectstart = function()
       {
@@ -42,7 +42,7 @@ const App = ()=>{
                stage={'welcome'}>
             </PopupContainer> } 
             {!isLoaded && <Loading>Loading ...</Loading> }
-            { isInGame && <Game goBack={()=>setGameStatus(false)}></Game>}
+            { isInGame && <Game soundObj={soundObj} goBack={()=>setGameStatus(false)}></Game>}
          </Suspense>
       </div>
    )

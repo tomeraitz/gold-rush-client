@@ -1,0 +1,60 @@
+.holder {
+    position: relative;
+    height: 70%;
+    flex-basis: 80%;
+    border-radius: 50px;
+    background: #2ecc71;
+  }
+
+  .holder-off{
+    background : #bdc3c7;
+    transition: 0.3s background ease-out;
+  }
+  .holder-on{
+    background :  #2ecc71;
+    transition: 0.3s background ease-out;
+  }
+  
+  .toggle {
+    position: absolute;
+    top: 0;
+    width: 30%;
+    height: 100%;
+    border-radius: 50%;
+    background: #ecf0f1;
+    box-shadow: 0 8px 20px 0 rgba(0, 0, 0, 0.25);
+  }
+  
+  @keyframes toggleOn {
+    0% {
+      right : 100%;
+      background: #ecf0f1;
+    }
+    100% {
+      right: 0;
+      background: #2ecc71;
+    }
+  }
+  @keyframes toggleOff {
+    0% {
+      left: 100%;
+      background: #2ecc71;
+    }
+    100% {
+      left: 0;
+      background: #ecf0f1;
+    }
+  }
+  .off {
+    animation: toggleOff 0.3s ease-out;
+    left: 0;
+    background: #bdc3c7;
+  }
+  
+  .on {
+    animation: toggleOn 0.3s ease-out;
+    right: 0;
+    background: #27ae60;
+  }
+  
+  

@@ -1,0 +1,33 @@
+.drop-down{
+    position: fixed;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    -webkit-transition: all 0.5s ease-in-out;
+    -moz-transition: all 0.5s ease-in-out;
+    -o-transition: all 0.5s ease-in-out;
+    transition: all 0.5s ease-in-out;
+    top: 0;
+    width: 15rem;
+    right: 0;
+    z-index: 1;
+  }
+  
+  .drop-down-close{
+    height: 0px;
+  }
+  
+  .drop-down-open{
+    height: 20rem;
+  }
+
+  .drop-down-inner{
+    display: flex;
+    position: absolute;
+    width: 100%;
+    top: 4rem;
+    background-color: #ffffffc7;
+    margin: 0 auto;
+    bottom: 0;
+  }
+

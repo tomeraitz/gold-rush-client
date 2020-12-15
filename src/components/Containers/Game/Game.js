@@ -13,6 +13,7 @@ const Game = (props)=>{
    const gameState = gameStateObj.data;
    const { socket , handleSwipe } = gameStateObj;
    const {startPress , endPress} = handleSwipe;
+   const {main} = props.soundObj
    const goBackFunc  = () =>{
       socket.close();
       props.goBack();
@@ -24,7 +25,7 @@ const Game = (props)=>{
          <>
             {!gameState.endGameStatus ?
             <div  className="game" >
-                  <Menu />
+                  <Menu main={main}/>
                   <Header className={startPress ? 'primary-bg header-phone' : 'primary-bg'}>
                      <Title className="title white header-title">Level {gameState.level}</Title>
                   </Header>
