@@ -1,0 +1,40 @@
+#tutorial{
+    height: 21rem;
+    width: 99%;
+    justify-self: center;
+    align-self: center;
+    display: flex;
+    flex-direction: column;
+}
+
+.tutorial-up{
+    border: 1px solid red;
+    height: 90%;
+    display: flex;
+    flex-direction: row;
+ 
+}
+.tutorial-des{
+    width: 95%;
+    height: 90%;
+    text-align: center;
+}
+
+.img-responsive {
+    max-width: 100%;
+    max-height: 92%;
+    height: auto;
+  }
+
+
+.tutorial-left-arrow, .tutorial-right-arrow{
+    border: 1px solid green;
+    width: 10%;
+}
+
+.tutorial-down{
+    border: 1px solid blue;
+    height: 5%;
+    justify-content: center;
+    align-content: center;
+}

@@ -35,7 +35,22 @@ const popUpStages ={
          disabled : false
       },
    },
+   tutorial : {
+      title : 'How To Play',
+      gifSrc : '',
+      buttonLeft : {
+         onClick : null,
+         title : 'Skip Tutorial',
+         disabled : false
+      },
+      buttonRight : {
+         onClick : null,
+         title : 'Go Back',
+         disabled : false
+      },
+   },
 }
+
 const PopupContainer = (props)=>{
    const [state, setState]=useState('');
 
@@ -50,17 +65,22 @@ const PopupContainer = (props)=>{
          popUpStages.endGame.buttonLeft.onClick = props.nextLevel;
          popUpStages.endGame.gifSrc = props.gifSrc;
       }
+      if(props.stage === 'tutorial'){
+         popUpStages.tutorial.buttonRight.onClick =  props.goBack;
+         popUpStages.tutorial.buttonLeft.onClick = props.skip; 
+      }
       setState(props.stage)
-   },[props.onClick, props.stage, props.title, props.titleButton, props.goBack, props.nextLevel, props.gifSrc])
+   },[props.onClick, props.stage, props.title, props.titleButton, props.goBack, props.nextLevel, props.gifSrc, props.skip])
    const stage = popUpStages[state];
-
+   const classTutorial = ()=>props.stage === 'tutorial' ? "pop-big" : "";
    return  (
       <Fragment>
          {stage &&
-         <Popup className="popup">
+         <Popup className={`popup ${classTutorial()}`}>
             <Title className="title">{stage.title}</Title>
+            {props.children && props.children}
             {stage.gifSrc  && <img className="image-popup"  src={stage.gifSrc} alt="win gif" height="50%" width="50%"></img>}
-            <div className="container-row">
+            <div className="popup-btn-container-row">
                <Button disabled={stage.buttonLeft.disabled} onClick={stage.buttonLeft.onClick} className="button primary-bg">{stage.buttonLeft.title}</Button>
                <Button disabled={stage.buttonRight.disabled} onClick={stage.buttonRight.onClick} className="button second-bg">{stage.buttonRight.title}</Button>
             </div>

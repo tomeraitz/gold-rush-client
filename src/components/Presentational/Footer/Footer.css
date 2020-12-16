@@ -17,3 +17,12 @@
     margin: 0;
 }
 
+@media screen and (min-width: 0px) and (max-width: 767px) and (orientation: portrait) {
+    .footer{
+        height: 100vw;
+        left: 0;
+    }
+    .footer-phone{
+        height: 5vw;
+    }
+  }

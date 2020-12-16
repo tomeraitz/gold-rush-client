@@ -59,3 +59,14 @@
   position: relative;
   height: 60%;
 }
+
+@media (orientation: landscape) {
+  .menu{
+    height: 2rem;
+  }
+  
+  .inner-burger{
+    width: 2rem;
+    height: 0.2rem;
+  }
+}

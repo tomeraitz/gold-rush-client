@@ -17,8 +17,41 @@
     flex-direction: column;
     justify-content: space-between;
     background-color:#ffffffc7;
+    animation: fadeIn 1s;
+}
+
+.popup-btn-container-row{
+    width: 100%;
+    height: 4rem;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: flex-start;
+}
+
+.pop-big{
+    height: 94vh;
 }
 
 .image-popup{
     margin: 0 auto;
 }
+
+@keyframes fadeIn {
+    from { opacity: 0; }
+    to   { opacity: 1; }
+}
+
+@media screen and (min-width: 0px) and (max-width: 767px) and (orientation: portrait) {
+    .popup-bg {
+      width: 100vh;
+      height: 100vw;
+    }
+    .popup{
+        width: 70vh;
+        height: 60vw;
+    }
+    .pop-big{
+        height: 94vw;
+    }
+  }

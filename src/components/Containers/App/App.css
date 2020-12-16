@@ -9,3 +9,16 @@
 }
 
 #mainSound { display: none }
+
+@media screen and (min-width: 0px) and (max-width: 767px) and (orientation: portrait) {
+    #app {
+      transform: rotate(90deg);
+      transform-origin: right top;
+      width: 100vh;
+      height: 100vw;
+      overflow-x: hidden;
+      position: absolute;
+      top: 100%;
+      right: 0;
+    }
+  }
