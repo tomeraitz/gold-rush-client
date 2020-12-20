@@ -40,7 +40,7 @@ const popUpStages ={
       gifSrc : '',
       buttonLeft : {
          onClick : null,
-         title : 'Skip Tutorial',
+         title : '',
          disabled : false
       },
       buttonRight : {
@@ -67,10 +67,11 @@ const PopupContainer = (props)=>{
       }
       if(props.stage === 'tutorial'){
          popUpStages.tutorial.buttonRight.onClick =  props.goBack;
-         popUpStages.tutorial.buttonLeft.onClick = props.skip; 
+         popUpStages.tutorial.buttonLeft.onClick = props.skip;
+         popUpStages.tutorial.buttonLeft.title = props.skipTitle
       }
       setState(props.stage)
-   },[props.onClick, props.stage, props.title, props.titleButton, props.goBack, props.nextLevel, props.gifSrc, props.skip])
+   },[props.onClick, props.stage, props.title, props.titleButton, props.goBack, props.nextLevel, props.gifSrc, props.skip, props.skipTitle])
    const stage = popUpStages[state];
    const classTutorial = ()=>props.stage === 'tutorial' ? "pop-big" : "";
    return  (

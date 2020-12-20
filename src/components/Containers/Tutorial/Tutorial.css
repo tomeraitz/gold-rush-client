@@ -8,7 +8,6 @@
 }
 
 .tutorial-up{
-    border: 1px solid red;
     height: 90%;
     display: flex;
     flex-direction: row;
@@ -20,6 +19,10 @@
     text-align: center;
 }
 
+.tutorial-des > p{
+  font-size: calc(1vw + 1vh);
+}
+
 .img-responsive {
     max-width: 100%;
     max-height: 92%;
@@ -28,13 +31,41 @@
 
 
 .tutorial-left-arrow, .tutorial-right-arrow{
-    border: 1px solid green;
     width: 10%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
 }
 
 .tutorial-down{
-    border: 1px solid blue;
     height: 5%;
-    justify-content: center;
-    align-content: center;
+    text-align: center;
+}
+
+.example-enter {
+    opacity: 0.01;
+  }
+  
+  .example-enter.example-enter-active {
+    opacity: 1;
+    transition: opacity 500ms ease-in;
+  }
+  
+  .example-leave {
+    opacity: 1;
+  }
+  
+  .example-leave.example-leave-active {
+    opacity: 0.01;
+    transition: opacity 300ms ease-in;
+  }
+
+  .slide-in {
+    animation: slide-in 0.5s forwards;
+    transform: translateX(-100%);
+}
+
+@keyframes slide-in {
+  100% { transform: translateX(0%); }
 }
