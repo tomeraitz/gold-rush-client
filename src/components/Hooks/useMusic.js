@@ -18,7 +18,7 @@ const useMusic = () =>{
             setMain(sound)
         }
     }
-    return [backgroundSound, {main}];
+    return [backgroundSound, {main, setMain}];
 }   
 
 

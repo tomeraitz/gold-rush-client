@@ -13,13 +13,18 @@ const Game = (props)=>{
    const gameState = gameStateObj.data;
    const { socket , handleSwipe } = gameStateObj;
    const {startPress , endPress} = handleSwipe;
-   const {main} = props.soundObj
+   const {main,setMain} = props.soundObj
    const goBackFunc  = () =>{
+      const isPlaying = main.playing();
+      main.pause();
+      if(isPlaying) setMain(null);
       socket.close();
       props.goBack();
    }
    
-   const nextLevel = () => socket.emit('messageToServer', {funcName : 'nextLevel', endGameStatus : gameState.endGameStatus});
+   const nextLevel = () => {
+      socket.emit('messageToServer', {funcName : 'nextLevel', endGameStatus : gameState.endGameStatus})
+   };
    if(gameState.gridArray || gameState.endGameStatus){
       return  (
          <>
@@ -29,8 +34,7 @@ const Game = (props)=>{
                   <Header className={startPress ? 'primary-bg header-phone' : 'primary-bg'}>
                      <Title className="title white header-title">Level {gameState.level}</Title>
                   </Header>
-                 
-               <div className={startPress ? 'grid grid-phone' : 'grid'}>
+               <div onClick={()=>Menu.toggleMenu(false)} className={startPress ? 'grid grid-phone' : 'grid'}>
                   { gameState.gridArray.map((item,index)=>{
                      return <div className={item.value} key={index}></div>
                   })}

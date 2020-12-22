@@ -8,11 +8,12 @@ import './Menu.css';
 const Menu = (props)=>{
    const [toggleClass, setToggleClass] = useState('');
    const {main} = props;
-   const toggleMenu = ()=>{
-      if(!toggleClass) setToggleClass('open-burger');
+   const toggleMenu = (isFromMenu=true)=>{
+      if(!toggleClass && isFromMenu) setToggleClass('open-burger');
       if(toggleClass === 'open-burger') setToggleClass('close-burger');
-      else setToggleClass('open-burger');
+      else if(isFromMenu) setToggleClass('open-burger');
    }
+   Menu.toggleMenu = toggleMenu;
    const toggleMusic = (isOn) =>{
       isOn === 'on' ? main.play() : main.pause();
    }

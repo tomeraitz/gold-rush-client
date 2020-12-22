@@ -1,9 +1,10 @@
 .holder {
-    position: relative;
-    height: 70%;
-    flex-basis: 80%;
-    border-radius: 50px;
-    background: #2ecc71;
+  position: relative;
+  height: 88%;
+  flex-basis: 63%;
+  border-radius: 50px;
+  justify-self: end;
+  background: #2ecc71;
   }
 
   .holder-off{

@@ -8,7 +8,7 @@
     -o-transition: all 0.5s ease-in-out;
     transition: all 0.5s ease-in-out;
     top: 0;
-    width: 15rem;
+    width: 10rem;
     right: 0;
     z-index: 1;
   }
@@ -18,16 +18,21 @@
   }
   
   .drop-down-open{
-    height: 20rem;
+    height: 10rem;
   }
 
   .drop-down-inner{
     display: flex;
     position: absolute;
     width: 100%;
-    top: 4rem;
+    top: 7vh;
     background-color: #ffffffc7;
     margin: 0 auto;
     bottom: 0;
   }
 
+  @media screen and (min-width: 0px) and (max-width: 767px) and (orientation: portrait) {
+    .drop-down-inner {
+      top: 7vw;
+    }
+  }
