@@ -17,22 +17,23 @@ const keyCodeList = {
 
 
 const useGameState = () => {
-   const [player] = useState('player1');
+   const [propsState, setPropsState] = useState({})
+   const { nameSpace , playerType, roomId } = propsState;
    const [data, setData] = useState({});
    const [socket, setSocket] = useState(null);
    const [timeoutInterval , setTimeoutInterval] = useState(null);
-  
-
+   
    const handleUserKeyPress = useCallback(event => {
       const {
          keyCode
       } = event;
       const serverData = {
-         player,
+         player : playerType,
          funcName: keyCodeList[keyCode]
      }
+     console.log("In handleUserKeyPress : ", keyCodeList[keyCode], )
      if(keyCodeList[keyCode]) socket.emit('messageToServer', serverData);
-   }, [socket , player]);
+   }, [socket , playerType]);
 
    const isDesktop = useCallback(()=>device.device.type === 'desktop',[]);
 
@@ -63,24 +64,30 @@ const useGameState = () => {
    }
 
    useEffect(() => {
-      const api = (`${process.env.REACT_APP_SERVER_API}/singlePlayer`).replace(/\s/g, '');
-      if(!socket) setSocket(io(api, {transports: ['websocket']}))
-      if(socket){
-         socket.on('connect', () => {
-            console.log('Successfully connected!');
-            if(isDesktop()) window.addEventListener('keydown', handleUserKeyPress);
-            socket.on('messageToClient', (msg) => {
-               setData({...msg});
-               if(!isDesktop()) endgame = msg.endGameStatus ? true : false;
-            });
-          });
-          socket.on('disconnect', () => {
-             window.removeEventListener('keydown', handleUserKeyPress)
-          })
+      if(nameSpace){
+         const api = (`${process.env.REACT_APP_SERVER_API}/${nameSpace}`).replace(/\s/g, '');
+         if(!socket) setSocket(io(api, {transports: ['websocket']}))
+         if(socket){
+            socket.on('connect', () => {
+               console.log('Successfully connected!');
+               if(isDesktop()) window.addEventListener('keydown', handleUserKeyPress);
+               socket.on('messageToClient', (msg) => {
+                  setData({...msg});
+                  if(!isDesktop()) endgame = msg.endGameStatus ? true : false;
+                  if(msg.connected){
+                     const data = {funcName : "join", id : roomId}
+                     socket.emit('messageToServer', data);
+                 }
+               });
+             });
+             socket.on('disconnect', () => {
+                window.removeEventListener('keydown', handleUserKeyPress)
+             })
+         }
       }
-   }, [handleUserKeyPress, socket, isDesktop]);
+   }, [handleUserKeyPress, socket, isDesktop, nameSpace, roomId]);
 
-   return {data, socket , handleSwipe : isDesktop() ? {} : handleSwipe}
+   return [{data, socket , handleSwipe : isDesktop() ? {} : handleSwipe}, useCallback((props)=>setPropsState(props),[])]
 }
 
 export default useGameState;

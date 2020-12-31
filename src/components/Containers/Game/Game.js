@@ -7,11 +7,13 @@ import PopupContainer from '../PopupContainer';
 import ButtonPhoneController from '../ButtonPhoneController';
 import Loading from '../Loading';
 import Menu from '../Menu';
+import { useEffect } from 'react';
+
 
 const Game = (props)=>{
-   const gameStateObj = useGameState();
-   const gameState = gameStateObj.data;
-   const { socket , handleSwipe } = gameStateObj;
+   const  [gameStateObj , setGameStateObj] =  useGameState();
+   const gameState = props.gameStateObj ? props.gameStateObj.data : gameStateObj.data;
+   const { socket , handleSwipe } = props.gameStateObj || gameStateObj;
    const {startPress , endPress} = handleSwipe;
    const {main,setMain} = props.soundObj
    const goBackFunc  = () =>{
@@ -21,7 +23,9 @@ const Game = (props)=>{
       socket.close();
       props.goBack();
    }
-   
+   useEffect(()=>{
+      if(!props.gameStateObj) setGameStateObj({nameSpace : 'singlePlayer', playerType : 'player1'});
+   },[props.gameStateObj, setGameStateObj])
    const nextLevel = () => {
       socket.emit('messageToServer', {funcName : 'nextLevel', endGameStatus : gameState.endGameStatus})
    };

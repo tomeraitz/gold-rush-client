@@ -3,9 +3,10 @@ import {
     useCallback
  } from 'react'
 
-const useHttpsRequests = () => {
-    const checkIfServerAlive = useCallback(() => axios.get(process.env.REACT_APP_SERVER_API),[]);
-    return {checkIfServerAlive}
+const useHttpsRequests = (path = '') => {
+    const api = process.env.REACT_APP_SERVER_API + path;
+    const response = useCallback(() => axios.get(api.replace(/\s/g, '') ),[api]);
+    return {response}
 }
 
 export default useHttpsRequests

@@ -18,7 +18,7 @@ const popUpStages ={
       buttonRight : {
          onClick : null,
          title : 'Multi player',
-         disabled : true
+         disabled : false
       },
    },
    endGame : {
@@ -49,6 +49,20 @@ const popUpStages ={
          disabled : false
       },
    },
+   multiPlayer : {
+      title : 'Multi Player',
+      gifSrc : '',
+      buttonLeft : {
+         onClick : null,
+         title : 'Copy Link',
+         disabled : false
+      },
+      buttonRight : {
+         onClick : null,
+         title : 'Go Back',
+         disabled : false
+      },
+   },
 }
 
 const PopupContainer = (props)=>{
@@ -56,7 +70,8 @@ const PopupContainer = (props)=>{
 
    useEffect(()=>{
       if(props.stage === 'welcome'){
-         popUpStages.welcome.buttonLeft.onClick = props.onClick;
+         popUpStages.welcome.buttonLeft.onClick = props.onClickLeft;
+         popUpStages.welcome.buttonRight.onClick = props.onClickRight;
       }
       if(props.stage === 'endGame'){
          popUpStages.endGame.title = props.title;
@@ -70,8 +85,12 @@ const PopupContainer = (props)=>{
          popUpStages.tutorial.buttonLeft.onClick = props.skip;
          popUpStages.tutorial.buttonLeft.title = props.skipTitle
       }
+      if(props.stage === 'multiPlayer'){
+         popUpStages.multiPlayer.buttonRight.onClick =  props.goBack;
+         popUpStages.multiPlayer.buttonLeft.onClick = props.copy;
+      }
       setState(props.stage)
-   },[props.onClick, props.stage, props.title, props.titleButton, props.goBack, props.nextLevel, props.gifSrc, props.skip, props.skipTitle])
+   },[props.onClickLeft,props.onClickRight, props.stage, props.title, props.titleButton, props.goBack, props.nextLevel, props.gifSrc, props.skip, props.skipTitle,props.copy])
    const stage = popUpStages[state];
    const classTutorial = ()=>props.stage === 'tutorial' ? "pop-big" : "";
    return  (

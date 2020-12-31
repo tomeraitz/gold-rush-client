@@ -1,0 +1,9 @@
+.multi{
+    text-align: center;
+    font-size: calc(1.5vw + 1.5vh);
+}
+
+.error-multi{
+    color: red;
+    font-weight: bold;
+}
