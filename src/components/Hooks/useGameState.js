@@ -18,7 +18,7 @@ const keyCodeList = {
 
 const useGameState = () => {
    const [propsState, setPropsState] = useState({})
-   const { nameSpace , playerType, roomId } = propsState;
+   const { nameSpace , playerType, roomId ,startTutorialMulti } = propsState;
    const [data, setData] = useState({});
    const [socket, setSocket] = useState(null);
    const [timeoutInterval , setTimeoutInterval] = useState(null);
@@ -31,12 +31,14 @@ const useGameState = () => {
          player : playerType,
          funcName: keyCodeList[keyCode]
      }
-     console.log("In handleUserKeyPress : ", keyCodeList[keyCode], )
      if(keyCodeList[keyCode]) socket.emit('messageToServer', serverData);
    }, [socket , playerType]);
 
    const isDesktop = useCallback(()=>device.device.type === 'desktop',[]);
-
+   const startMultiGame = ()=>{
+      const data = {funcName : "readyToPlay", roomId}
+      socket.emit('messageToServer', data);
+   }
    const endPress = () =>{
       clearTimeout(timeoutInterval);
       setTimeoutInterval(null);
@@ -78,6 +80,10 @@ const useGameState = () => {
                      const data = {funcName : "join", id : roomId}
                      socket.emit('messageToServer', data);
                  }
+                 if(msg.canPlay){
+                    const sendToApp = (isChangePositions) =>startTutorialMulti(isChangePositions);
+                    sendToApp()
+                 }
                });
              });
              socket.on('disconnect', () => {
@@ -85,9 +91,14 @@ const useGameState = () => {
              })
          }
       }
-   }, [handleUserKeyPress, socket, isDesktop, nameSpace, roomId]);
+      else if(!nameSpace && socket){
+         console.log("In socket out : ", nameSpace)
+         socket.disconnect()
+         setSocket(null);
+      }
+   }, [handleUserKeyPress, socket, isDesktop, nameSpace, roomId, startTutorialMulti]);
 
-   return [{data, socket , handleSwipe : isDesktop() ? {} : handleSwipe}, useCallback((props)=>setPropsState(props),[])]
+   return [{data, socket , startMultiGame,  handleSwipe : isDesktop() ? {} : handleSwipe}, useCallback((props)=>setPropsState(props),[])]
 }
 
 export default useGameState;

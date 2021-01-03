@@ -8,7 +8,8 @@ import {
 import Loading from '../Loading';
 import useHttpsRequests from '../../Hooks/useHttpsRequests';
 import useMusic from '../../Hooks/useMusic';
-import MultiPlayer from '../MultiPlayer/MultiPlayer';
+import useGameState from '../../Hooks/useGameState';
+const MultiPlayer =lazy(() => import('../MultiPlayer/MultiPlayer'));
 const Tutorial = lazy(() => import('../Tutorial/Tutorial'));
 const PopupContainer = lazy(() => import('../PopupContainer'));
 const Game = lazy(() => import('../Game'));
@@ -18,9 +19,14 @@ const App = ()=>{
    const [isInGame , setGameStatus] = useState(false);
    const [isTutorial, setTutorial] = useState(false);
    const [isMulti, setMulti] = useState(false);
+   const  [gameStateObj , setGameStateObj] = useGameState();
    const { response } = useHttpsRequests();
    const [backgroundSound, soundObj]= useMusic();
-
+   const [changePositionsIndexInTutorial, setChangePositions] = useState(false);
+   const startTutorialMulti = (isChangePositions, ) =>{
+      setChangePositions(isChangePositions);
+      setTutorial(true)
+   }
    useEffect(()=>{
       document.onselectstart = function()
       {
@@ -53,16 +59,36 @@ const App = ()=>{
             } } 
             stage={'welcome'}>
             </PopupContainer> } 
-            {(!isInGame && isLoaded && isTutorial && !isMulti)  && <Tutorial goBackFunc={()=>{setTutorial(false)}} startGame={
+            {(!isInGame && isLoaded && isTutorial)  && <Tutorial 
+            goBackFunc={()=>{setTutorial(false)}} 
+            startGame={
                ()=>{
                   backgroundSound();
                   setTutorial(false);
                   setGameStatus(true);
+                  if(isMulti){
+                     gameStateObj.startMultiGame();
+                  }
                }
-            }/>}
-            {(!isInGame && isLoaded && !isTutorial && isMulti)  && <MultiPlayer goBackFunc={()=>{setMulti(false)}}/>}
+            }
+            changePositions={changePositionsIndexInTutorial}
+            />}
+            {(!isInGame && isLoaded && !isTutorial && isMulti)  && <MultiPlayer 
+            startTutorialMulti={startTutorialMulti} 
+            setGameStateObj={setGameStateObj}
+            goBackFunc={()=>{setMulti(false)}}/>}
             {!isLoaded && <Loading>Loading ...</Loading> }
-            { (isInGame && !isTutorial) && <Game isMulti={isMulti} soundObj={soundObj} goBack={()=>setGameStatus(false)}></Game>}
+            { (isInGame && !isTutorial) && 
+            <Game  
+                  soundObj={soundObj} 
+                  goBack={()=>{
+                     setGameStateObj({})
+                     setGameStatus(false)
+                  }}
+                  setGameStateObj={setGameStateObj}
+                  isMulti={isMulti}
+                  gameStateObj={gameStateObj}>
+            </Game>}
          </Suspense>
       </div>
    )
