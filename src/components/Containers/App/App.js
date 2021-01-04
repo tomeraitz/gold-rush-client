@@ -23,21 +23,45 @@ const App = ()=>{
    const { response } = useHttpsRequests();
    const [backgroundSound, soundObj]= useMusic();
    const [changePositionsIndexInTutorial, setChangePositions] = useState(false);
-   const startTutorialMulti = (isChangePositions, ) =>{
+   /**
+    * startTutorialMulti - activate from socket when 2 players in room
+    * @param {boolean} isChangePositions - for multi tutorial (the seconde player is player 2)
+    */
+   const startTutorialMulti = (isChangePositions ) =>{
       setChangePositions(isChangePositions);
       setTutorial(true)
    }
+   /**
+    * startGame - when user finish tutorial and want to start the game
+    */
+   const startGame = ()=>{
+      backgroundSound();
+      setTutorial(false);
+      setGameStatus(true);
+      if(isMulti){
+         gameStateObj.startMultiGame();
+      }
+   }
+   /**
+    * goBack - when user wants to go to main page (welcome)
+    */
+   const goBack = ()=>{
+      setGameStateObj({});
+      setGameStatus(false);
+      isTutorial && setTutorial(false);
+      isMulti && setMulti(false);
+   }
+
    useEffect(()=>{
-      document.onselectstart = function()
+      document.onselectstart = function() // Prevent gug phone long press
       {
          if(isInGame) return false;
       };
       if(!isLoaded){
-         response().then((res)=>{
-            console.log(res.data)
+         response().then(()=>{ // Check if the server is alive
             const url = new URL(window.location.href);
             const urlId = url.searchParams.get("id");
-            if(urlId){
+            if(urlId){ // if user enter from url with Id - show him the multi page
                setMulti(true)
             }
             setLoad(true)
@@ -53,42 +77,31 @@ const App = ()=>{
          <Suspense fallback={<Loading>Loading ...</Loading>}>
             {(!isInGame && isLoaded && !isTutorial && !isMulti)  && 
             <PopupContainer 
-            onClickLeft={()=> setTutorial(true)} 
-            onClickRight={()=>{
-               setMulti(true);
-            } } 
-            stage={'welcome'}>
+               onClickLeft={()=> setTutorial(true)} 
+               onClickRight={()=>{setMulti(true)}} 
+               stage={'welcome'}>
             </PopupContainer> } 
-            {(!isInGame && isLoaded && isTutorial)  && <Tutorial 
-            goBackFunc={()=>{setTutorial(false)}} 
-            startGame={
-               ()=>{
-                  backgroundSound();
-                  setTutorial(false);
-                  setGameStatus(true);
-                  if(isMulti){
-                     gameStateObj.startMultiGame();
-                  }
-               }
-            }
-            changePositions={changePositionsIndexInTutorial}
+            {(!isInGame && isLoaded && isTutorial)  && 
+            <Tutorial 
+               goBackFunc={goBack} 
+               startGame={startGame}
+               changePositions={changePositionsIndexInTutorial}
             />}
-            {(!isInGame && isLoaded && !isTutorial && isMulti)  && <MultiPlayer 
-            startTutorialMulti={startTutorialMulti} 
-            setGameStateObj={setGameStateObj}
-            goBackFunc={()=>{setMulti(false)}}/>}
-            {!isLoaded && <Loading>Loading ...</Loading> }
+            {(!isInGame && isLoaded && !isTutorial && isMulti)  && 
+            <MultiPlayer 
+               startTutorialMulti={startTutorialMulti} 
+               setGameStateObj={setGameStateObj}
+               goBackFunc={goBack}
+            />}
             { (isInGame && !isTutorial) && 
             <Game  
                   soundObj={soundObj} 
-                  goBack={()=>{
-                     setGameStateObj({})
-                     setGameStatus(false)
-                  }}
+                  goBack={goBack}
                   setGameStateObj={setGameStateObj}
                   isMulti={isMulti}
                   gameStateObj={gameStateObj}>
             </Game>}
+            {!isLoaded && <Loading>Loading ...</Loading> }
          </Suspense>
       </div>
    )

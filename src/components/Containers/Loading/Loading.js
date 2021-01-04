@@ -1,6 +1,6 @@
 import './Loading.css';
 import Title from '../../Presentational/Title'
-const divArray = [...Array(8).keys()];
+const divArray = [...Array(8).keys()]; // number of dots
 
 const Loading = (props)=>{
    const {children} = props;

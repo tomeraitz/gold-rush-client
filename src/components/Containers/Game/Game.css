@@ -45,6 +45,9 @@
     background-position: center;
     height: 110%;
 }
+.glow-player{
+    animation: glow 1.5s linear infinite alternate;
+}
 
 .player2{
     background-image: url("../../../assets/images/player2.png");
@@ -55,6 +58,11 @@
     height: 110%;
 }
 
+@keyframes glow {
+    from { filter: drop-shadow(0px 0px 10px rgba(255, 255, 255, 0.7)); }
+    50% { filter: drop-shadow(0px 0px 10px rgb(71, 71, 71));}
+    to { filter: drop-shadow(0px 0px 10px rgb(255, 255, 255));}
+  }
 
 @media (orientation: landscape) and (min-height: 0px) and (max-height: 400px){
     .grid{

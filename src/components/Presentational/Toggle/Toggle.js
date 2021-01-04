@@ -1,9 +1,13 @@
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import './Toggle.css'
 
 const Toggle = (props)=>{
    const { className} = props
-   const [isOn, setClass] = useState(className);
+   console.log("className : ", className)
+   const [isOn, setClass] = useState('on');
+   useEffect(()=>{
+      setClass(className)
+   },[className])
    const toggle= ()=> isOn === 'on' ? (setClass('off'), props.onClick && props.onClick('off')): (setClass('on'), props.onClick && props.onClick('on'));
    return (
             <>

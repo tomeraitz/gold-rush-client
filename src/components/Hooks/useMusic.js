@@ -21,5 +21,4 @@ const useMusic = () =>{
     return [backgroundSound, {main, setMain}];
 }   
 
-
 export default useMusic;

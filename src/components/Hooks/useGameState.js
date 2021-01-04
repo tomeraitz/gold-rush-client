@@ -35,10 +35,13 @@ const useGameState = () => {
    }, [socket , playerType]);
 
    const isDesktop = useCallback(()=>device.device.type === 'desktop',[]);
+
    const startMultiGame = ()=>{
       const data = {funcName : "readyToPlay", roomId}
+      setData({});
       socket.emit('messageToServer', data);
    }
+
    const endPress = () =>{
       clearTimeout(timeoutInterval);
       setTimeoutInterval(null);
@@ -92,7 +95,6 @@ const useGameState = () => {
          }
       }
       else if(!nameSpace && socket){
-         console.log("In socket out : ", nameSpace)
          socket.disconnect()
          setSocket(null);
       }
