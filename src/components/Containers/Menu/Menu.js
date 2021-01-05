@@ -18,7 +18,6 @@ const Menu = memo((props)=>{
    const toggleMusic = (isOn) =>{
       isOn === 'on' ? main.play() : main.pause();
    }
-   console.log("render!")
    return  (
       <>
          <div className="menu" onClick={toggleMenu}> 

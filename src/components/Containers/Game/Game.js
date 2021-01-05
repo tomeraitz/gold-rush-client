@@ -9,7 +9,7 @@ import Menu from '../Menu';
 import { useEffect } from 'react';
 
 const Game = (props)=>{
-   const { socket , handleSwipe, data, startMultiGame } = props.gameStateObj;
+   const { socket , handleSwipe, data, startMultiGame ,  player} = props.gameStateObj;
    const {startPress , endPress} = handleSwipe;
    const {main,setMain} = props.soundObj;
    /**
@@ -52,15 +52,16 @@ const Game = (props)=>{
    if(data.gridArray || data.endGameStatus){
       return  (
          <>
+         <Menu main={main}/>
             {!data.endGameStatus ?
             <div  className="game" >
-                  <Menu main={main}/>
                   <Header className={startPress ? 'primary-bg header-phone' : 'primary-bg'}>
                      <Title className="title white header-title">{mainTitle()}</Title>
                   </Header>
                <div onClick={()=>Menu.toggleMenu(false)} className={startPress ? 'grid grid-phone' : 'grid'}>
                   { data.gridArray.map((item,index)=>{
-                     return <div className={item.value} key={index}></div>
+                     const classPlayer = item.value === player ? `${item.value} glow-player` : `${item.value}`
+                     return <div className={classPlayer} key={index}></div>
                   })}
                </div>
                <ButtonPhoneController startPress={startPress} endPress={endPress} />
@@ -69,7 +70,12 @@ const Game = (props)=>{
                      <Title className="title second-bg footer-item white medium">Payer 2 score: {data.player2  && data.player2.score}</Title>
                   </Footer>
             </div>
-            : <PopupContainer 
+            : 
+            <>
+               <Header className={startPress ? 'primary-bg header-phone' : 'primary-bg'}>
+                  <Title className="title white header-title">{mainTitle()}</Title>
+               </Header>
+               <PopupContainer 
                      title={data.endGameStatus} 
                      titleButton={titleButton()}
                      gifSrc={data.endGameStatus.includes('won') ? "https://media.giphy.com/media/lo4Rb0bkHuH1V8dbvY/giphy.gif" : "https://media.giphy.com/media/8byuvxPG1m7dtYHEph/giphy.gif"}
@@ -77,12 +83,34 @@ const Game = (props)=>{
                      nextLevel={nextLevel}
                      stage={'endGame'}>
                </PopupContainer>
+            </>
             }
          </>
       )
    }
-   else return <Loading>{loadingText}</Loading>
-
+   else if(data.userLeft && props.isMulti){
+      return (
+         <>
+            <Header className={startPress ? 'primary-bg header-phone' : 'primary-bg'}>
+               <Title className="title white header-title">{mainTitle()}</Title>
+            </Header>
+            <Menu main={main}/>
+            <PopupContainer 
+               goBack={goBackFunc}
+               stage={'userLeft'}>
+            </PopupContainer>
+         </>
+            )
+   }
+   else return (
+                  <>
+                     <Menu main={main}/>
+                     <Header className={startPress ? 'primary-bg header-phone' : 'primary-bg'}>
+                        <Title className="title white header-title"></Title>
+                     </Header>
+                     <Loading>{loadingText}</Loading>
+                  </>
+               )
 }
 
 export default Game;

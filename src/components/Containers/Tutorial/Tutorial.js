@@ -4,6 +4,7 @@ import CarouselDots from '../../Presentational/CarouselDots/CarouselDots';
 import player1Gif from '../../../assets/images/player1-pointer.gif';
 import player2Gif from '../../../assets/images/player2-pointer.gif';
 import coin from '../../../assets/images/coin.png';
+import keyBoard from '../../../assets/images/keyBoard-2.png';
 import { useEffect, useState } from 'react';
 import { BsChevronRight } from "react-icons/bs";
 import { BsChevronLeft } from "react-icons/bs";
@@ -21,6 +22,8 @@ const Tutorial = ({goBackFunc , startGame,  changePositions=false})=>{
       src: player1Gif}, 
       {title:'This is your opponent (player2), you can see his score in the bottom right',
       src: player2Gif},
+      {title:'Play with the keyboard (or custom) arrows',
+      src: keyBoard}, 
       {title:'Your goal is to pick up more coins then your opponent',
       src: coin} 
    ])
@@ -40,7 +43,6 @@ const Tutorial = ({goBackFunc , startGame,  changePositions=false})=>{
    }
    useEffect(()=>{
       if(changePositions){
-         console.log(changePositions)
          const tutorialArray = [...tutorialData];
          const element = tutorialArray[0];
          tutorialArray.splice(0, 1);
@@ -48,7 +50,6 @@ const Tutorial = ({goBackFunc , startGame,  changePositions=false})=>{
          setTutorialData([...tutorialArray])
       }
    },[])
-   console.log(tutorialData)
    return (
       <PopupContainer 
          goBack={goBackFunc}

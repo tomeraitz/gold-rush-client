@@ -50,19 +50,33 @@ const popUpStages ={
       },
    },
    multiPlayer : {
-      title : 'Multi Player',
-      gifSrc : '',
-      buttonLeft : {
-         onClick : null,
-         title : 'Copy Link',
-         disabled : false
+         title : 'Multi Player',
+         gifSrc : '',
+         buttonLeft : {
+            onClick : null,
+            title : 'Copy Link',
+            disabled : false
+         },
+         buttonRight : {
+            onClick : null,
+            title : 'Go Back',
+            disabled : false
+         },
       },
-      buttonRight : {
-         onClick : null,
-         title : 'Go Back',
-         disabled : false
-      },
-   },
+      userLeft : {
+         title : 'The Second User Left The Game',
+         gifSrc : '',
+         buttonLeft : {
+            onClick : null,
+            title : 'continue',
+            disabled : true
+         },
+         buttonRight : {
+            onClick : null,
+            title : 'Go Back',
+            disabled : false
+         },
+      }
 }
 
 const PopupContainer = (props)=>{
@@ -88,6 +102,9 @@ const PopupContainer = (props)=>{
       if(props.stage === 'multiPlayer'){
          popUpStages.multiPlayer.buttonRight.onClick =  props.goBack;
          popUpStages.multiPlayer.buttonLeft.onClick = props.copy;
+      }
+      if(props.stage === 'userLeft'){
+         popUpStages.userLeft.buttonRight.onClick =  props.goBack;
       }
       setState(props.stage)
    },[props.onClickLeft,props.onClickRight, props.stage, props.title, props.titleButton, props.goBack, props.nextLevel, props.gifSrc, props.skip, props.skipTitle,props.copy])

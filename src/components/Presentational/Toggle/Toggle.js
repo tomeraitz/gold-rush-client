@@ -3,7 +3,6 @@ import './Toggle.css'
 
 const Toggle = (props)=>{
    const { className} = props
-   console.log("className : ", className)
    const [isOn, setClass] = useState('on');
    useEffect(()=>{
       setClass(className)

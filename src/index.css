@@ -21,7 +21,7 @@ body {
 }
 
 body:after {
-  content: url('./assets/images/background.jpg') url('./assets/images/block.png') url('./assets/images/coin.png') url('./assets/images/player1-pointer.gif') url('./assets/images/player2-pointer.gif') url('./assets/images/coin.png') url('./assets/images/player1.png') url('./assets/images/player2.png');
+  content: url('./assets/images/background.jpg') url('./assets/images/block.png') url('./assets/images/coin.png') url('./assets/images/player1-pointer.gif') url('./assets/images/player2-pointer.gif') url('./assets/images/coin.png') url('./assets/images/player1.png') url('./assets/images/player2.png') url('./assets//images/keyBoard-2.png');
   display: none; 
 }
 

@@ -46,10 +46,17 @@ const App = ()=>{
     * goBack - when user wants to go to main page (welcome)
     */
    const goBack = ()=>{
-      setGameStateObj({});
-      setGameStatus(false);
-      isTutorial && setTutorial(false);
-      isMulti && setMulti(false);
+      const url = new URL(window.location.href);
+      const urlId = url.searchParams.get("id");
+      if(urlId){
+          window.location.replace(window.location.origin)
+      }
+      else{
+         setGameStateObj({});
+         setGameStatus(false);
+         isTutorial && setTutorial(false);
+         isMulti && setMulti(false);
+      }
    }
 
    useEffect(()=>{

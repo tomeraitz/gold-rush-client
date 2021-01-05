@@ -55,7 +55,7 @@ const MultiPlayer = (props)=>{
    },[]);
    return  (
       <>
-      {!urlId ? 
+      {(!urlId || error) ? 
       <PopupContainer 
             goBack={goBackFunc}
             copy={roomId ? ()=>copyText(url) : null}
