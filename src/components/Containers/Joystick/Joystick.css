@@ -1,0 +1,6 @@
+.joystick{
+  display: flex;
+  text-align: center;
+  justify-content: center;
+  height: 15vh;
+}

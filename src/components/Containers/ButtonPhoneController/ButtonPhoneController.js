@@ -7,7 +7,7 @@ const ButtonPhoneController = ({startPress , endPress})=>{
       {startPress && 
          <div className="controller-container">
             <div className="flex-controller">
-               <Arrow className="arrow up" id="38" onTouchStart={startPress} onTouchEnd={endPress} />
+               <Arrow className="arrow up" id="38" onTouchStart={startPress}  onTouchEnd={endPress} />
             </div>
             <div className="flex-controller">
                <Arrow className="arrow" id="37" onTouchStart={startPress} onTouchEnd={endPress} />

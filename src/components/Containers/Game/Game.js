@@ -3,14 +3,14 @@ import Header from '../../Presentational/Header';
 import Footer from '../../Presentational/Footer';
 import Title from '../../Presentational/Title';
 import PopupContainer from '../PopupContainer';
+import Joystick from '../Joystick';
 import ButtonPhoneController from '../ButtonPhoneController';
 import Loading from '../Loading';
 import Menu from '../Menu';
 import { useEffect } from 'react';
 
 const Game = (props)=>{
-   const { socket , handleSwipe, data, startMultiGame ,  player} = props.gameStateObj;
-   const {startPress , endPress} = handleSwipe;
+   const { socket , data, startMultiGame ,  player, handleUserKeyPress} = props.gameStateObj;
    const {main,setMain} = props.soundObj;
    /**
     * goBackFunc - when user wants to go to main page (welcome)
@@ -55,24 +55,24 @@ const Game = (props)=>{
          <Menu main={main}/>
             {!data.endGameStatus ?
             <div  className="game" >
-                  <Header className={startPress ? 'primary-bg header-phone' : 'primary-bg'}>
+                  <Header className={handleUserKeyPress ? 'primary-bg header-phone' : 'primary-bg'}>
                      <Title className="title white header-title">{mainTitle()}</Title>
                   </Header>
-               <div onClick={()=>Menu.toggleMenu(false)} className={startPress ? 'grid grid-phone' : 'grid'}>
+               <div onClick={()=>Menu.toggleMenu(false)} className={handleUserKeyPress ? 'grid grid-phone' : 'grid'}>
                   { data.gridArray.map((item,index)=>{
                      const classPlayer = item.value === player ? `${item.value} glow-player` : `${item.value}`
                      return <div className={classPlayer} key={index}></div>
                   })}
                </div>
-               <ButtonPhoneController startPress={startPress} endPress={endPress} />
-                  <Footer className={startPress && 'footer-phone'}>
+               {handleUserKeyPress && <Joystick handleUserKeyPress={handleUserKeyPress}/>}
+                  <Footer className={handleUserKeyPress && 'footer-phone'}>
                      <Title className="title primary-bg footer-item white medium">Payer 1 score: {data.player1  && data.player1.score}</Title>
                      <Title className="title second-bg footer-item white medium">Payer 2 score: {data.player2  && data.player2.score}</Title>
                   </Footer>
             </div>
             : 
             <>
-               <Header className={startPress ? 'primary-bg header-phone' : 'primary-bg'}>
+               <Header className={handleUserKeyPress ? 'primary-bg header-phone' : 'primary-bg'}>
                   <Title className="title white header-title">{mainTitle()}</Title>
                </Header>
                <PopupContainer 
@@ -91,7 +91,7 @@ const Game = (props)=>{
    else if(data.userLeft && props.isMulti){
       return (
          <>
-            <Header className={startPress ? 'primary-bg header-phone' : 'primary-bg'}>
+            <Header className={handleUserKeyPress ? 'primary-bg header-phone' : 'primary-bg'}>
                <Title className="title white header-title">{mainTitle()}</Title>
             </Header>
             <Menu main={main}/>
@@ -105,7 +105,7 @@ const Game = (props)=>{
    else return (
                   <>
                      <Menu main={main}/>
-                     <Header className={startPress ? 'primary-bg header-phone' : 'primary-bg'}>
+                     <Header className={handleUserKeyPress ? 'primary-bg header-phone' : 'primary-bg'}>
                         <Title className="title white header-title"></Title>
                      </Header>
                      <Loading>{loadingText}</Loading>
