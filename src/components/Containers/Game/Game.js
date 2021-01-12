@@ -55,24 +55,24 @@ const Game = (props)=>{
          <Menu main={main}/>
             {!data.endGameStatus ?
             <div  className="game" >
-                  <Header className={handleUserKeyPress ? 'primary-bg header-phone' : 'primary-bg'}>
+                  <Header className={handleUserKeyPress.press ? 'primary-bg header-phone' : 'primary-bg'}>
                      <Title className="title white header-title">{mainTitle()}</Title>
                   </Header>
-               <div onClick={()=>Menu.toggleMenu(false)} className={handleUserKeyPress ? 'grid grid-phone' : 'grid'}>
+               <div onClick={()=>Menu.toggleMenu(false)} className={handleUserKeyPress.press ? 'grid grid-phone' : 'grid'}>
                   { data.gridArray.map((item,index)=>{
                      const classPlayer = item.value === player ? `${item.value} glow-player` : `${item.value}`
                      return <div className={classPlayer} key={index}></div>
                   })}
                </div>
-               {handleUserKeyPress && <Joystick handleUserKeyPress={handleUserKeyPress}/>}
-                  <Footer className={handleUserKeyPress && 'footer-phone'}>
+               {handleUserKeyPress.press  && <Joystick handleUserKeyPress={handleUserKeyPress.press} player={data[player]}/>}
+                  <Footer className={handleUserKeyPress.press && 'footer-phone'}>
                      <Title className="title primary-bg footer-item white medium">Payer 1 score: {data.player1  && data.player1.score}</Title>
                      <Title className="title second-bg footer-item white medium">Payer 2 score: {data.player2  && data.player2.score}</Title>
                   </Footer>
             </div>
             : 
             <>
-               <Header className={handleUserKeyPress ? 'primary-bg header-phone' : 'primary-bg'}>
+               <Header className={handleUserKeyPress.press ? 'primary-bg header-phone' : 'primary-bg'}>
                   <Title className="title white header-title">{mainTitle()}</Title>
                </Header>
                <PopupContainer 
@@ -91,7 +91,7 @@ const Game = (props)=>{
    else if(data.userLeft && props.isMulti){
       return (
          <>
-            <Header className={handleUserKeyPress ? 'primary-bg header-phone' : 'primary-bg'}>
+            <Header className={handleUserKeyPress.press ? 'primary-bg header-phone' : 'primary-bg'}>
                <Title className="title white header-title">{mainTitle()}</Title>
             </Header>
             <Menu main={main}/>
@@ -105,7 +105,7 @@ const Game = (props)=>{
    else return (
                   <>
                      <Menu main={main}/>
-                     <Header className={handleUserKeyPress ? 'primary-bg header-phone' : 'primary-bg'}>
+                     <Header className={handleUserKeyPress.press ? 'primary-bg header-phone' : 'primary-bg'}>
                         <Title className="title white header-title"></Title>
                      </Header>
                      <Loading>{loadingText}</Loading>

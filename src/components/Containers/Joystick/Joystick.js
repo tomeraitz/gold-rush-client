@@ -1,9 +1,9 @@
-import { useEffect, useRef, useState, memo } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import './Joystick.css';
-const memoFunc = (previousProps, nextProps) => true
-const Joystick = memo(({handleUserKeyPress})=>{
+
+const Joystick = ({handleUserKeyPress , player})=>{
    const canvasRef = useRef(null);
-   const [joystickState, setJoystickState] = useState({init : 0, mousePressed : false});
+   const [joystickState, setJoystickState] = useState({init : 0, mousePressed : false, nextTick : true});
 
    const drawOuterCircle =()=>{
       joystickState.ctx.beginPath();
@@ -23,15 +23,16 @@ const Joystick = memo(({handleUserKeyPress})=>{
       joystickState.ctx.closePath();
     }
 
-    const startMoving = () =>{
+    const startMoving = (e) =>{
       const state = {...joystickState};
       state.mousePressed = true;
       setJoystickState(state);
     }
 
-    const onMoving = (e) =>{
+    const onMoving = async  (e) =>{
       const state = {...joystickState};
-      if (state.mousePressed) {
+      console.log(state.nextTick)
+      if (state.mousePressed && state.nextTick) {
          const event ={}
             let cancelateXPotion = e.changedTouches[0].pageX - state.canvas.offsetLeft;
             let cancelateYPotion = e.changedTouches[0].pageY - state.canvas.offsetTop;
@@ -41,22 +42,24 @@ const Joystick = memo(({handleUserKeyPress})=>{
             if(cancelateYPotion < state.upBorder) cancelateYPotion = state.upBorder;;
             if(Math.abs(cancelateYPotion - state.canvas.height/2) > Math.abs(cancelateXPotion - state.canvas.width/2)){
                event.keyCode = cancelateYPotion < state.canvas.height/2 ? 38 : 40;
-               // cancelateXPotion = state.canvas.width/2;
+               cancelateXPotion = state.canvas.width/2;
             }
          else{
             event.keyCode = cancelateXPotion < state.canvas.width/2 ? 37 : 39;
-            // cancelateYPotion = state.canvas.height/2;
+            cancelateYPotion = state.canvas.height/2;
          }
          state.ctx.clearRect(0, 0,state.canvas.width, state.canvas.height);
          handleUserKeyPress(event);
+         state.nextTick = false;
          drawOuterCircle();
          drawInnerCircle(cancelateXPotion, cancelateYPotion, true);
-         setJoystickState(state);
+         await setJoystickState(state);
       }
     }
 
-    const endMoving = () =>{
+    const endMoving = (e) =>{
       const state = {...joystickState};
+      console.log(e)
       if (state.mousePressed) {
          state.mousePressed = false;
          state.ctx.clearRect(0, 0,state.canvas.width, state.canvas.height);
@@ -67,8 +70,8 @@ const Joystick = memo(({handleUserKeyPress})=>{
     }
 
    useEffect(()=>{
-      const state = {...joystickState};
-      if(state.init === 0){
+      const state = {};
+      if(joystickState.init === 0){
          state['canvas'] = canvasRef.current;
          state['ctx'] = state.canvas.getContext('2d');
          state.leftBorder =25;
@@ -77,21 +80,33 @@ const Joystick = memo(({handleUserKeyPress})=>{
          state.rightBorder = 75
          state.init = 1
       }
-      else if(state.init === 1){
+      else if(joystickState.init === 1){
          state.init = 2
          drawOuterCircle();
          drawInnerCircle();
       }
-      setJoystickState(state);
+      setJoystickState(lastState =>{
+         return { ...lastState, ...state}
+      });
    },[joystickState.init])
 
+   useEffect(()=>{
+      const state = {};
+      if(!joystickState.nextTick){
+         state.nextTick = true;
+         setJoystickState(lastState =>{
+            return { ...lastState, ...state}
+         });
+      }
+   },[player])
+
    return  (
-      <div className="joystick" onTouchStart={startMoving} onTouchMove={onMoving} onTouchEnd={endMoving} onTouchCancel={endMoving}>
+      <div className="joystick"   onTouchStart={startMoving} onTouchMove={onMoving} onTouchEnd={endMoving} onTouchCancel={endMoving}>
          <canvas width="100%" height="100%" ref={canvasRef} id="canvas"></canvas>
       </div>
      
    )
-},memoFunc)
+}
 
 export default Joystick;
 

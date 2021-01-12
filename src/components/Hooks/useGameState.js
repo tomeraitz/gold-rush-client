@@ -100,7 +100,7 @@ const useGameState = () => {
       }
    }, [handleUserKeyPress, socket, isDesktop, nameSpace, roomId, startTutorialMulti]);
 
-   return [{data, socket, player : playerType, startMultiGame,  handleUserKeyPress : isDesktop() ? {} : handleUserKeyPress}, useCallback((props)=>setPropsState(props),[])]
+   return [{data, socket, player : playerType, startMultiGame,  handleUserKeyPress : isDesktop() ? {} :{press : handleUserKeyPress} }, useCallback((props)=>setPropsState(props),[])]
 }
 
 export default useGameState;
