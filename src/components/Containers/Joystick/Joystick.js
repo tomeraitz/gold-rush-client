@@ -35,6 +35,7 @@ const Joystick = ({handleUserKeyPress , player})=>{
          const event ={}
             let cancelateXPotion = e.changedTouches[0].pageX - state.canvas.offsetLeft;
             let cancelateYPotion = e.changedTouches[0].pageY - state.canvas.offsetTop;
+            
             if(Math.abs(cancelateYPotion - state.canvas.height/2) > Math.abs(cancelateXPotion - state.canvas.width/2)){
                event.keyCode = cancelateYPotion < state.canvas.height/2 ? 38 : 40;
                cancelateXPotion = state.canvas.width/2;
