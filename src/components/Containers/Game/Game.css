@@ -81,7 +81,7 @@
         height: 160%;
     }
     .grid-phone{
-      height: 63vh;
+      height: 70vh;
     }
 }
 
@@ -109,6 +109,6 @@
         height: 100vw;
     }
     .grid-phone{
-        height: 63vw;
+        height: 70vw;
       }
   }

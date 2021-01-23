@@ -54,7 +54,7 @@ const Game = (props)=>{
          <>
          <Menu main={main}/>
             {!data.endGameStatus ?
-            <div  className="game" >
+            <div  className="game">
                   <Header className={handleUserKeyPress.press ? 'primary-bg header-phone' : 'primary-bg'}>
                      <Title className="title white header-title">{mainTitle()}</Title>
                   </Header>

@@ -9,12 +9,11 @@
 }
 
 .header-phone{
-    flex: 1;
-    height: 5vh;
+
 }
 
 @media screen and (min-width: 0px) and (max-width: 767px) and (orientation: portrait) {
     .header-phone{
-        height: 6vw;
+        height: 7vw;
     }
   }

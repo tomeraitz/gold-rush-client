@@ -31,15 +31,10 @@ const Joystick = ({handleUserKeyPress , player})=>{
 
     const onMoving = async  (e) =>{
       const state = {...joystickState};
-      console.log(state.nextTick)
       if (state.mousePressed && state.nextTick) {
          const event ={}
             let cancelateXPotion = e.changedTouches[0].pageX - state.canvas.offsetLeft;
             let cancelateYPotion = e.changedTouches[0].pageY - state.canvas.offsetTop;
-            if(cancelateXPotion > state.rightBorder) cancelateXPotion = state.rightBorder;
-            if(cancelateXPotion < state.leftBorder) cancelateXPotion = state.leftBorder;
-            if(cancelateYPotion > state.downBorder)cancelateYPotion = state.downBorder;
-            if(cancelateYPotion < state.upBorder) cancelateYPotion = state.upBorder;;
             if(Math.abs(cancelateYPotion - state.canvas.height/2) > Math.abs(cancelateXPotion - state.canvas.width/2)){
                event.keyCode = cancelateYPotion < state.canvas.height/2 ? 38 : 40;
                cancelateXPotion = state.canvas.width/2;
@@ -50,6 +45,10 @@ const Joystick = ({handleUserKeyPress , player})=>{
          }
          state.ctx.clearRect(0, 0,state.canvas.width, state.canvas.height);
          handleUserKeyPress(event);
+         if(cancelateXPotion > state.rightBorder) cancelateXPotion = state.rightBorder;
+         if(cancelateXPotion < state.leftBorder) cancelateXPotion = state.leftBorder;
+         if(cancelateYPotion > state.downBorder)cancelateYPotion = state.downBorder;
+         if(cancelateYPotion < state.upBorder) cancelateYPotion = state.upBorder;
          state.nextTick = false;
          drawOuterCircle();
          drawInnerCircle(cancelateXPotion, cancelateYPotion, true);
@@ -59,7 +58,6 @@ const Joystick = ({handleUserKeyPress , player})=>{
 
     const endMoving = (e) =>{
       const state = {...joystickState};
-      console.log(e)
       if (state.mousePressed) {
          state.mousePressed = false;
          state.ctx.clearRect(0, 0,state.canvas.width, state.canvas.height);
